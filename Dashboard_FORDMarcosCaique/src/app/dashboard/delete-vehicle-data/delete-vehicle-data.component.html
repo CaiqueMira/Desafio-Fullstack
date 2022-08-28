@@ -1,0 +1,101 @@
+<h2 class="title text-center mb-5">Deletar dado de veículo</h2>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <form class="text-center" (submit)="remove()"
+      [formGroup]="deleteVehicleDataForm">
+        <input
+          type="text"
+          class="form-control border border-3 border-dark rounded-end"
+          name="vinCodeInput"
+          placeholder="Insira o código VIN"
+          formControlName="vin"
+          required
+        />
+        <input
+          type="text"
+          class="form-control border border-3 border-dark mt-4"
+          name="odometerInput"
+          placeholder="Odômetro"
+          formControlName="odometer"
+          [value]="vehicleData?.odometer"
+          readonly
+        />
+        <input
+          type="text"
+          class="form-control border border-3 border-dark mt-4"
+          name="tirePressureInput"
+          placeholder="Pressão do pneu"
+          formControlName="tirePressure"
+          [value]="vehicleData?.tirePressure"
+          readonly
+        />
+        <input
+          type="text"
+          class="form-control border border-3 border-dark mt-4"
+          name="statusInput"
+          placeholder="Status"
+          formControlName="status"
+          [value]="vehicleData?.status"
+          readonly
+        />
+        <input
+          type="text"
+          class="form-control border border-3 border-dark mt-4"
+          name="batteryStatusInput"
+          placeholder="Status da bateria"
+          formControlName="batteryStatus"
+          [value]="vehicleData?.batteryStatus"
+          readonly
+        />
+        <input
+          type="text"
+          class="form-control border border-3 border-dark mt-4"
+          name="fuelLevelInput"
+          placeholder="Nível do tanque"
+          formControlName="fuelLevel"
+          [value]="vehicleData?.fuelLevel"
+          readonly
+        />
+        <input
+          type="text"
+          class="form-control border border-3 border-dark mt-4"
+          name="LatitudeInput"
+          placeholder="Latitude"
+          formControlName="latitude"
+          [value]="vehicleData?.latitude"
+          readonly
+        />
+        <input
+          type="text"
+          class="form-control border border-3 border-dark mt-4"
+          name="longitudeInput"
+          placeholder="Longitude"
+          formControlName="longitude"
+          [value]="vehicleData?.longitude"
+          readonly
+        />
+
+        <div class="d-inline">
+          <button
+            type="submit"
+            class="btn btn-danger mt-4"
+            [disabled]="deleteVehicleDataForm.invalid"
+          >
+            Remover
+          </button>
+        </div>
+        <div class="col-6 d-inline ms-2">
+          <a [routerLink]="['/dashboard']"
+          class="btn btn-outline-secondary mt-4"
+          >
+          <i class="text-outline-secondary">
+            <fa-icon [icon]="faAngleLeft"></fa-icon>
+          </i>
+            Voltar
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

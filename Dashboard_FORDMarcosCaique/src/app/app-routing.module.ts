@@ -6,12 +6,12 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'opening',
     pathMatch: 'full'
   },
   {
-    path: 'login',
-    loadChildren: () => import('./login/login.module').then((module) => module.LoginModule),
+    path: 'opening',
+    loadChildren: () => import('./opening/opening.module').then((module) => module.OpeningModule),
     //canLoad: [LoginGuard]
   },
   {

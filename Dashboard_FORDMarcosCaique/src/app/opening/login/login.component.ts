@@ -1,10 +1,8 @@
-import { AutenticationService } from './../../autentication/autentication.service';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { faCircleInfo, faLock } from '@fortawesome/free-solid-svg-icons';
 import { faEye, faEyeSlash, faUser } from '@fortawesome/free-regular-svg-icons';
-
-const NOT_AUTHORIZED = '401'
+import { faCircleInfo, faLock } from '@fortawesome/free-solid-svg-icons';
+import { AutenticationService } from 'src/app/autentication/autentication.service';
 
 @Component({
   selector: 'app-login',

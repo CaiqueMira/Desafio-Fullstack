@@ -1,3 +1,5 @@
+const moment = require('moment')
+
 class Database {
   connection;
 
@@ -381,16 +383,17 @@ class Database {
   /***************************************/
 
   listUsers() {
-    const sql = `SELECT * FROM user`;
+    const sql = `SELECT id, name, email, password, fullName, signupDate FROM user`;
 
-    this.connection.query(sql, (error, user) => {
+    this.connection.query(sql, (error, users) => {
       console.log("Users");
-      console.log(user);
+      users.forEach(user => user.signupDate = moment(user.signupDate, 'YYYY-MM-DD HH:mm:ss').format('DD/MM/YYYY HH:mm:ss'))
+      console.log(users);
     });
   }
 
   listVehiclesData() {
-    const sql = `SELECT * FROM vehicles_data`;
+    const sql = `SELECT id, vin, odometer, tirePressure, status, batteryStatus, fuelLevel, latitude, longitude FROM vehicles_data`;
 
     this.connection.query(sql, (error, vehiclesData) => {
       console.log("VehiclesData");
@@ -399,7 +402,7 @@ class Database {
   }
 
   listVehicleModels() {
-    const sql = `SELECT * FROM vehicle_models`;
+    const sql = `SELECT id, model, totalVolume, connected, softwareUpdates FROM vehicle_models`;
 
     this.connection.query(sql, (error, vehicleModels) => {
       console.log("VehicleModels");

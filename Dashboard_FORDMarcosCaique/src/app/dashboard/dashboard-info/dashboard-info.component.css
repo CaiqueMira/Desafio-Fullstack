@@ -1,0 +1,35 @@
+.title {
+  color: #00165A;
+}
+
+thead {
+  background-color: #00105B;
+}
+
+table th {
+  border: 1px solid black;
+}
+
+tbody > tr {
+  border: none;
+}
+
+.card-select {
+  min-height: 92px;
+}
+
+
+tfoot {
+  background-color: #00105B;
+}
+
+.percentageTextChart {
+  color: #02165E;
+}
+
+.btn {
+  background-color: #DCDCDA;
+}
+
+
+

@@ -31,11 +31,14 @@ module.exports = app => {
     })
 
     app.post('/user/login', (req, res) => {
-        const data = req.body 
-        const header =  req.headers['x-access-token']
-        console.log(header)
-        
+        const data = req.body        
 
-        User.login(data, res)
+        User.login(res, data)
+    })
+
+    app.get('/user/exists/:name', (req, res) => {
+        const name = req.params.name
+
+        User.searchForName(res, name)
     })
 }

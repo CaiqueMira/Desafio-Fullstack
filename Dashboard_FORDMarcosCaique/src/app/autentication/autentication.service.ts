@@ -14,7 +14,11 @@ export class AutenticationService {
 
 
   login(userName: string, password: string): Observable<any> {
-    return this.httpClient.post(`${API}/user/login`, { name: userName, password: password })
+    return this.httpClient.post(`${API}/user/login`, { name: userName, password })
+  }
+
+  signup() {
+    
   }
 
 

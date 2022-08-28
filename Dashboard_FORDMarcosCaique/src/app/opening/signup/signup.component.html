@@ -1,0 +1,105 @@
+<div class="row align-items-center">
+  <div class="col-md-6">
+    <img src="../../../assets/imgs/ranger.png" alt="" class="img-fluid" />
+  </div>
+  <div class="col-md-6">
+    <h2 class="text-center text-success">Registrar-se</h2>
+    <form (submit)="signup()" #signupForm="ngForm" [formGroup]="newUserForm">
+      <input
+        type="text"
+        class="form-control border border-3 border-dark rounded-end mt-4"
+        name="userNameInput"
+        placeholder="Insira seu nome de usuário"
+        formControlName="name"
+        minlength="5"
+        required
+      />
+      <small
+        class="text-danger"
+        *ngIf="newUserForm.get('name')?.errors?.['required'] && newUserForm.get('name')?.touched"
+        >Campo de usuário obrigatório</small
+      >
+      <small
+        class="text-danger"
+        *ngIf="newUserForm.get('name')?.errors?.['minlength'] && newUserForm.get('name')?.touched"
+        >Nome de usuário deve conter ao menos cinco caracteres</small
+      >
+      <small
+        class="text-danger d-block"
+        *ngIf="newUserForm.get('name')?.errors?.['smallLetter'] && newUserForm.get('name')?.touched"
+        >Nome de usuário deve conter somente caracteres minúsculos</small
+      >
+      <small
+        class="text-danger d-block"
+        *ngIf="newUserForm.get('name')?.errors?.['existingUser']"
+        >Nome de usuário já cadastrado</small
+      >
+
+      <input
+        type="email"
+        class="form-control border border-3 border-dark mt-4"
+        name="emailInput"
+        placeholder="Insira seu email"
+        formControlName="email"
+        required
+      />
+      <small
+        class="text-danger"
+        *ngIf="newUserForm.get('email')?.errors?.['required'] && newUserForm.get('email')?.touched"
+        >Campo de email obrigatório</small
+      >
+      <small
+        class="text-danger"
+        *ngIf="newUserForm.get('email')?.errors?.['email'] && newUserForm.get('email')?.touched"
+        >Formato de email inválido</small
+      >
+
+      <input
+        type="text"
+        class="form-control border border-3 border-dark mt-4"
+        name="fullnameInput"
+        placeholder="Insira seu nome completo"
+        formControlName="fullName"
+        required
+      />
+      <small
+        class="text-danger"
+        *ngIf="newUserForm.get('fullName')?.errors?.['required'] && newUserForm.get('fullName')?.touched"
+        >Campo de nome completo obrigatório</small
+      >
+
+      <input
+        type="password"
+        class="form-control border border-3 border-dark mt-4"
+        name="passwordInput"
+        placeholder="Insira sua senha"
+        formControlName="password"
+        required
+      />
+      <small
+        class="text-danger"
+        *ngIf="newUserForm.get('password')?.errors?.['required'] && newUserForm.get('password')?.touched"
+        >Campo de senha obrigatório</small
+      >
+
+      <p>Já possui cadastro? <a [routerLink]="['/opening']">Logar-se</a></p>
+
+      <div class="d-grid">
+        <button
+          type="submit"
+          class="btn btn-primary mt-1"
+          [disabled]="newUserForm.get('name')?.errors?.['required'] ||
+          newUserForm.get('name')?.errors?.['minlength'] ||
+          newUserForm.get('name')?.errors?.['smallLetter'] ||
+          newUserForm.get('name')?.errors?.['existingUser'] ||
+          newUserForm.get('email')?.errors?.['required'] ||
+          newUserForm.get('email')?.errors?.['email'] ||
+          newUserForm.get('fullName')?.errors?.['required'] ||
+          newUserForm.get('password')?.errors?.['required']"
+        >
+          Cadastrar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

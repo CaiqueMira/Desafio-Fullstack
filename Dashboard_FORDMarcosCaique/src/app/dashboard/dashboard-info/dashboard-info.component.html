@@ -1,0 +1,102 @@
+<h2 class="title text-center mb-5">Dashboard FORD</h2>
+<div class="container-fluid">
+
+  <div class="row justify-content-around">
+
+    <div class="col-12 col-sm-6 col-xl-3">
+      <div class="card mb-2 border-dark px-0 mx-auto" style="max-width: 250px;">
+        <h3 class="card-header fs-4 text-secondary">Veículo</h3>
+        <div class="card-body card-select">
+          <select class="form-select" (change)="verifyVehicle()" [(ngModel)]="selectInput">
+            <option *ngFor="let vehicle of allVehicles">{{vehicle.model}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-xl-3" *ngIf="vehicleObject">
+      <app-card [cardTitle]="'Total de Vendas'" [cardText]="vehicleObject.totalVolume"></app-card>
+    </div>
+
+    <div class="col-12 col-sm-6 col-xl-3" *ngIf="vehicleObject">
+      <app-card [cardTitle]="'Conectados'" [cardText]="vehicleObject.connected" ></app-card>
+    </div>
+
+    <div class="col-12 col-sm-6 col-xl-3" *ngIf="vehicleObject">
+      <app-card [cardTitle]="'Update Software'" [cardText]="vehicleObject.softwareUpdates" ></app-card>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-xl-4">
+      <div class="mx-auto" style="max-width: 950px;" *ngIf="vehicleObject">
+        <img [src]='vehicleUrl' [alt]="vehicleObject.model" class="img-fluid">
+      </div>
+    </div>
+    <div class="col-xl-3 offset-xl-2 text-center" *ngIf="vehicleObject">
+      <div id="donut_chart_connected"></div>
+      <p class="text-center percentageTextChart fs-3 fw-bold" *ngIf="chartPercentageConnected">{{chartPercentageConnected + " %"}}</p>
+    </div>
+    <div class="col-xl-3 text-center" *ngIf="vehicleObject">
+      <div id="donut_chart_software_updates"></div>
+      <p class="px-auto percentageTextChart fs-3 fw-bold" *ngIf="chartPercentageSoftwareUpdates">{{chartPercentageSoftwareUpdates + " %"}}</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="table-responsive">
+  <table class="table table-borderless">
+    <thead class="table-bordered text-white">
+      <tr>
+        <th>Código - Vin</th>
+        <th>Odômetro</th>
+        <th>Nível de Combustível</th>
+        <th>Status</th>
+        <th>Lat.</th>
+        <th>Long.</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div class="d-flex">
+            <form [formGroup]="tableForm">
+              <input type="text" class="form-control border-secondary" style="max-width: 200px;" formControlName="vinCodeInput">
+            </form>
+            <a [routerLink]="['add']" class="btn ms-1">
+              <i class="text-secondary">
+                <fa-icon [icon]="faPlus"></fa-icon>
+              </i>
+            </a>
+            <a [routerLink]="['update']" class="btn ms-1">
+              <i class="text-secondary">
+                <fa-icon [icon]="faArrowsRotate"></fa-icon>
+              </i>
+            </a>
+            <a [routerLink]="['delete']" class="btn ms-1">
+              <i class="text-secondary">
+                <fa-icon [icon]="faTrashCan"></fa-icon>
+              </i>
+            </a>
+          </div>
+
+        </td>
+        <td class="fw-bold" *ngIf="vehicleData">{{vehicleData.odometer}} KM</td>
+        <td class="fw-bold" *ngIf="vehicleData">{{vehicleData.fuelLevel}} %</td>
+        <td class="fw-bold" *ngIf="vehicleData">{{vehicleData.status}}</td>
+        <td class="fw-bold" *ngIf="vehicleData">{{vehicleData.latitude}}</td>
+        <td class="fw-bold" *ngIf="vehicleData">{{vehicleData.longitude}}</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="6">
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+

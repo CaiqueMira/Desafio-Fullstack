@@ -1,4 +1,4 @@
-import { User } from './../../login/interfaces/user.model';
+import { User } from 'src/app/opening/login/interfaces/user.model';
 import { TokenService } from './../token/token.service';
 import jwt_decode from 'jwt-decode'
 import { Injectable } from '@angular/core';

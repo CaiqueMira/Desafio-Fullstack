@@ -25,14 +25,19 @@ module.exports = app => {
     })
 
     app.delete('/vehicleData/:id', (req, res) => {
-        const id = parseInt(req.params.id)
+        const id = parseInt(req.params.id)        
 
         vehicleData.deleteById(res, id)
     })
 
     app.get('/vehicleDataVin/:vin', (req, res) => {
-        const params = req.params.vin               
-        vehicleData.getDataFiltered(res, params)
+        const vin = req.params.vin               
+        vehicleData.getDataFiltered(res, vin)
+    })
+
+    app.get('/vehicleDataVin/exists/:vin', (req, res) => {
+        const vin = req.params.vin
+        vehicleData.searchForVin(res, vin)
     })
 
     

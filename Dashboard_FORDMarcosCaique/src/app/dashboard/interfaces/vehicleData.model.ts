@@ -1,4 +1,4 @@
-export interface VehiclesDatas extends Array<VehicleData> {}
+export interface VehiclesData extends Array<VehicleData> {}
 
 export interface VehicleData {
   id: number
@@ -13,5 +13,5 @@ export interface VehicleData {
 }
 
 export interface vehicleDataAPI {
-  vehicleData: VehiclesDatas
+  vehicleData: VehiclesData
 }

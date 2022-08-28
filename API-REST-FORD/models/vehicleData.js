@@ -2,7 +2,7 @@ const connection = require('../infraestructure/connection')
 
 class VehiclesData {
     listAll(res) {
-        const sql = `SELECT * FROM vehicles_data`
+        const sql = `SELECT id, vin, odometer, tirePressure, status, batteryStatus, fuelLevel, latitude, longitude FROM vehicles_data`
 
         connection.query(sql, (error, results) => {
             if(error) {
@@ -38,7 +38,7 @@ class VehiclesData {
                 if(error) {
                     res.status(400).send(error)
                 }
-                else {
+                else {                    
                     res.status(200).send({vehicleData})
                 }
             })
@@ -46,7 +46,7 @@ class VehiclesData {
     }
 
     searchById(res, id) {
-        const sql = `SELECT * FROM vehicles_data WHERE ID = ?`
+        const sql = `SELECT id, vin, odometer, tirePressure, status, batteryStatus, fuelLevel, latitude, longitude FROM vehicles_data WHERE ID = ?`
 
         connection.query(sql, id, (error, results) => {
             if(error) {
@@ -59,13 +59,13 @@ class VehiclesData {
     }
 
     alterById(res, id, values) {
-        const sql = `UPDATE vehicles_data SET ? WHERE ID = ?`
+        const sql = `UPDATE vehicles_data SET ? WHERE ID = ?`                
         
         connection.query(sql, [values, id], (error, results) => {
             if(error) {
                 res.status(400).send(error)
             }
-            else {
+            else {                               
                 res.status(200).send({id, ...values})
             }
         })
@@ -85,21 +85,33 @@ class VehiclesData {
 
     getDataFiltered(res, value) { 
         value = value.toUpperCase()            
-        const sql = `SELECT * FROM vehicles_data`
+        const sql = `SELECT id, vin, odometer, tirePressure, status, batteryStatus, fuelLevel, latitude, longitude FROM vehicles_data`
 
         connection.query(sql, value, (error, results) => {
             if(error) {
                 res.status(400).send(error)
             }
-            else { 
-                console.log(results)             
-                                              
+            else {                 
                 results = results.filter((obj) =>           
-                    obj.vin.slice(0, value.length) === value                                      
-                )
-                console.log(results)               
-                
+                obj.vin.slice(0, value.length) === value                                    
+                )               
                 res.status(200).send({vehicleData: results})
+            }
+        })
+    }
+
+    searchForVin(res, vin) {
+        vin = vin.toUpperCase()        
+        const sql = `SELECT vin FROM vehicles_data WHERE vin = ?`
+
+        connection.query(sql, vin, (error, results) => {
+            if(error) {
+                res.status(400).send(error)
+            }
+            else {                
+                if(results.length > 0) {
+                    res.status(200).send(...results)
+                }
             }
         })
     }

@@ -2,13 +2,12 @@ const connection = require('../infraestructure/connection')
 
 class VehicleModels {    
     listAll(res) {
-        const sql = 'SELECT * FROM vehicle_models'
+        const sql = 'SELECT id, model, totalVolume, connected, softwareUpdates FROM vehicle_models'
         connection.query(sql, (error, results) => {
             if(error) {
                 res.status(400).send(error)
             }
-            else {
-                console.log(results)
+            else {                
                 res.status(200).send({vehicles: results})
             }
         })
@@ -28,8 +27,7 @@ class VehicleModels {
     }
 
     searchById(res, id) {
-        const sql = `SELECT * FROM vehicle_models WHERE id = ?`
-        console.log(id)
+        const sql = `SELECT id, model, totalVolume, connected, softwareUpdates FROM vehicle_models WHERE id = ?`        
 
         connection.query(sql, id, (error, results) => {
             if(error) {
