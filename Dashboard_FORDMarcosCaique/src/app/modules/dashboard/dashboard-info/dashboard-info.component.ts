@@ -87,6 +87,11 @@ export class DashboardInfoComponent implements OnInit {
     options['pieHole'] = 0.6
     chart.draw(this.getDataTable("Conectados", this.vehicleObject.connected), options)
     this.chartPercentageConnected = ((this.vehicleObject.connected / this.vehicleObject.totalVolume) * 100).toFixed(2)
+
+    const divChart = document.querySelector("#donut_chart_connected div div") as HTMLElement
+    divChart.style.margin = 'auto'
+
+
   }
 
   // Seta as configurações do gráfico de update software
@@ -99,6 +104,8 @@ export class DashboardInfoComponent implements OnInit {
     options['pieHole'] = 0.6
     chart.draw(this.getDataTable("Atualizados", this.vehicleObject.softwareUpdates), options)
     this.chartPercentageSoftwareUpdates = ((this.vehicleObject.softwareUpdates / this.vehicleObject.totalVolume) * 100).toFixed(2)
+    const divChart = document.querySelector("#donut_chart_software_updates div div") as HTMLElement
+    divChart.style.margin = 'auto'
   }
 
   // Configuração dos conteúdos dos gráficos
@@ -109,7 +116,7 @@ export class DashboardInfoComponent implements OnInit {
     data.addColumn('number', 'Amount');
     let row = [
       [column, value],
-      ["Total", this.vehicleObject.totalVolume - value]
+      ["Restante", this.vehicleObject.totalVolume - value]
     ]
 
     data.addRows(row)
