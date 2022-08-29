@@ -6,6 +6,7 @@ class Database {
   init(connection) {
     this.connection = connection;
     this.createSchema();
+    this.setSchema();
     this.createVehicleModelsTable();
     this.createVehiclesDataTable();
     this.createUserTable();  
@@ -13,22 +14,21 @@ class Database {
   }
   
   createSchema() {
-    const sql = `CREATE SCHEMA ford`
+    const sql = `CREATE SCHEMA IF NOT EXISTS ford`
     this.connection.query(sql, (error) => {
       if(error) {
         console.log(error)
       }
       else {
-        console.log("Database ford created")
-        this.setSchema();
+        console.log("Database ford created")        
       }
     })
   }
 
-  setSchema() {
+  setSchema() {    
     const sql = `Use ford`
     this.connection.query(sql, (error) => {
-      if(error) {
+      if(error) {        
         console.log(error)
       }      
     })
