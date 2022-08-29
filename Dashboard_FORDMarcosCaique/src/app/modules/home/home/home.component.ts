@@ -8,8 +8,6 @@ import { faUser } from '@fortawesome/free-regular-svg-icons';
 })
 export class HomeComponent implements OnInit {
 
-  faUser = faUser
-
   constructor() { }
 
   ngOnInit(): void {

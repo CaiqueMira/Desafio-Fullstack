@@ -1,4 +1,3 @@
-const { json } = require('express')
 const moment = require('moment')
 const connection = require('../infraestructure/connection')
 
@@ -12,7 +11,7 @@ class User {
                 res.status(400).send(error)
             }
             else {
-                results.forEach(result => result.signupDate = result.signupDate.toString())                                
+                results.forEach(result => result.signupDate = moment(result.signupDate, 'YYYY-MM-DD HH:mm:ss').format('DD/MM/YYYY HH:mm:ss'))                                
                 res.status(200).send(results)
             }
         })
@@ -118,7 +117,7 @@ class User {
             }
             else {                
                 if(results.length > 0) {
-                    res.status(200).send(results[0])
+                    res.status(200).send(...results)
                 }                                                    
             }
         })
